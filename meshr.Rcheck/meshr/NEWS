@@ -1,0 +1,27 @@
+VERSION 1.2.1
+------------------------
+   o Version check function () of MeSHDbi is used, when creating MeSHHyperGParams object
+   o statistics such as odd-ratio, expected count of MeSH terms, No. of MeSH Term, and No. of all MeSH Term is attached to MeSHHyperGResult.
+   o The result of enrichment analysis is stored as list object. When the users want to save it as data.frame, "as.data.frame" function for MeSHHyperGResult is available.
+   o documentation improvements
+
+VERSION 1.0.4
+------------------------
+   o Bug Fix (<NA> rows in using with MeSH.db and org.MeSH.XXX.db)
+   o "pAdjust<-" and "pvalueCutoff<-" functions were implemented
+
+VERSION 1.0.3
+------------------------
+   o documentation improvements
+
+VERSION 1.0.2
+------------------------
+   o documentation improvements
+
+VERSION 1.0.1
+------------------------
+   o documentation improvements
+
+VERSION 0.99.0
+------------------------
+   o Package released
