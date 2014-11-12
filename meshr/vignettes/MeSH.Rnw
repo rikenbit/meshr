@@ -400,14 +400,14 @@ library("org.MeSH.Hsa.db")
 
 We create a parameter instance by specifying the objects of selected and universal genes, the name of the annotation package, the category of MeSH, the database of correspondence between Gene IDs and MeSH IDs (see also \textbf{listDatabases} in the section 2.2.1), $p$-value cutoff, and the choice of a multiple-testing correction method.
 In this first example, we use \Rpackage{org.MeSH.Hsa.db} because the above RNA-seq data is extracted from human cells.
-We choose D (Drugs and chemicals) category, gendoo database, $p$-value cutoff 0.05, and no multiple-testing adjustment.
+We choose C (Diseases) category, gendoo database, $p$-value cutoff 0.05, and no multiple-testing adjustment.
 For more details on description of all the arguments, readers are referred to the \textbf{MeSHHyperGParams-class}
 help page.
 
 \begin{center}
 <<echo=TRUE,print=FALSE>>=
 meshParams <- new("MeSHHyperGParams", geneIds=sig.geneid.cummeRbund[,2], universeGeneIds=geneid.cummeRbund[,2],
-                  annotation="org.MeSH.Hsa.db", category="D", database="gendoo", pvalueCutoff=0.05, pAdjust="none")
+                  annotation="org.MeSH.Hsa.db", category="C", database="gendoo", pvalueCutoff=0.05, pAdjust="none")
 @
 \end{center}
 
