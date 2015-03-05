@@ -5,12 +5,13 @@ warnings_are_errors: true
 apt_packages:
  - libcurl4-openssl-dev
  - libxml2-dev
+
 r_binary_packages:
  - RUnit
  - testthat
 
 r_github_packages:
- - rikenbit/meshr_release/meshr
+ - rikenbit/meshr_release
 
 notifications:
   emails:
