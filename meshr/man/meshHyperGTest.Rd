@@ -4,7 +4,7 @@
 
 \title{Hypergeometric Tests for MeSH term association}
 
-\description{ Given a \code{MeSHHyperGParams} object 
+\description{ Given a \code{MeSHHyperGParams} object
   containing a set of selected and background gene IDs,
   and gene-MeSH annotation data of interest, \code{meshHyperGTest}
   performs Hypergeomtric test for over-representation of each MeSH term
@@ -17,7 +17,7 @@
 \details{
 
   For details on creating \code{MeSHHyperGParams} object, please read
-  the documentation in the \link[meshr]{MeSHHyperGParams-class}. 
+  the documentation in the \link[meshr]{MeSHHyperGParams-class}.
 
 }
 

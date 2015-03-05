@@ -65,6 +65,8 @@ setMethod("meshHyperGTest", signature(p="MeSHHyperGParams"),
   if(length(which(stats < p@pvalueCutoff)) != 0){
       outputA <- outputA[which(stats < p@pvalueCutoff), ]
     }else{
+      outputA <- outputA[1,]
+      outputA[,] <- NA
       stop("None of MeSH Term is significant !")
     }
 

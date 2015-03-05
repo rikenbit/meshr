@@ -6,12 +6,8 @@ Installation
 ======
 ~~~~
 git clone https://github.com/rikenbit/meshr_release/
+cd meshr_release
 R CMD INSTALL meshr
-~~~~
-or type the code below in the R console window
-~~~~
-library(devtools)
-devtools::install_github("rikenbit/meshr_release")
 ~~~~
 
 References

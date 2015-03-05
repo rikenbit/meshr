@@ -3,8 +3,11 @@
 ** data
 ** inst
 ** preparing package for lazy loading
+ 警告: package ‘RSQLite’ was built under R version 3.1.2 
 ** help
 *** installing help indices
 ** building package indices
 ** installing vignettes
 ** testing if installed package can be loaded
+ 警告: package ‘RSQLite’ was built under R version 3.1.2 
+* DONE (meshr)

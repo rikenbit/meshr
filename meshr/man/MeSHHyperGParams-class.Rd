@@ -52,7 +52,7 @@ Objects can be created by calls of the form \code{new("MeSHHyperGParams", ...)}.
       subset of the gene ids on the chip that will be used as the
       universe for the hypergeometric calculation.}
     \item{\code{annotation}:}{A string giving the name of the
-      gene-MeSH annotation package like org.MeSH.XXX.db.}
+      gene-MeSH annotation package like MeSH.XXX.eg.db.}
     \item{\code{category}:}{A string giving the name of the
       MeSH category like A, B, C, D, ...and so on.}
     \item{\code{database}:}{A string giving the name of the

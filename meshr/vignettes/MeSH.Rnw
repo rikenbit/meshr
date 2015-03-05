@@ -405,7 +405,7 @@ For more details on description of all the arguments, readers are referred to th
 help page.
 
 \begin{center}
-<<echo=TRUE,print=FALSE>>=
+<<echo=TRUE,print=FALSE,eval = FALSE>>=
 meshParams <- new("MeSHHyperGParams", geneIds=sig.geneid.cummeRbund[,2], universeGeneIds=geneid.cummeRbund[,2],
                   annotation="org.MeSH.Hsa.db", category="C", database="gendoo", pvalueCutoff=0.05, pAdjust="none")
 @
@@ -414,7 +414,7 @@ meshParams <- new("MeSHHyperGParams", geneIds=sig.geneid.cummeRbund[,2], univers
 The \textbf{meshHyperGTest} function carries out a hypergeometric test and returns an instance of class \textbf{MeSHHyperGResult}.
 
 \begin{center}
-<<echo=TRUE,print=FALSE>>=
+<<echo=TRUE,print=FALSE,eval = FALSE>>=
 meshR <- meshHyperGTest(meshParams)
 @
 \end{center}
@@ -423,7 +423,7 @@ Simply typing the \textbf{MeSHHyperGResult} class gives a brief description of t
 the choice of a MeSH category, the annotation data used, and a total number of identified overrepresented MeSH terms.
 
 \begin{center}
-<<echo=TRUE,print=FALSE>>=
+<<echo=TRUE,print=FALSE,eval = FALSE>>=
 meshR
 @
 \end{center}
@@ -432,7 +432,7 @@ Full details of the result is obtained by calling the \textbf{summary} function 
 This presents significantly enriched MeSH ID, MeSH term, and their associated $p$-values.
 
 \begin{center}
-<<echo=TRUE,print=FALSE>>=
+<<echo=TRUE,print=FALSE,eval = FALSE>>=
 head(summary(meshR))
 @
 \end{center}
@@ -441,7 +441,7 @@ Switching to test another MeSH category and another database can be easily done.
 For example, to choose the category as G (Phenomena and Processes) and the database as gene2pubmed, we can do the following.
 
 \begin{center}
-<<echo=TRUE,print=FALSE>>=
+<<echo=TRUE,print=FALSE,eval = FALSE>>=
 category(meshParams) <- "G"
 database(meshParams) <- "gene2pubmed"
 meshR <- meshHyperGTest(meshParams)

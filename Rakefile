@@ -38,10 +38,10 @@ end
 
 desc "CHECK"
 task :CHECK do
-	sh "R CMD CHECK meshr_1.2.1.tar.gz"
+	sh "R CMD CHECK meshr_1.2.5.tar.gz"
 end
 
 desc "INSTALL"
 task :INSTALL do
-	sh "R CMD INSTALL meshr_1.2.1.tar.gz"
+	sh "R CMD INSTALL meshr_1.2.5.tar.gz"
 end
