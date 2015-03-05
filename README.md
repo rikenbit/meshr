@@ -1,4 +1,4 @@
-# meshr_release [![Build Status](https://magnum.travis-ci.com/rikenbit/meshr_release.svg?token=6E5jqenfjNHBfKtQkabT&branch=master)](https://magnum.travis-ci.com/rikenbit/)
+# meshr_release [![Build Status](https://magnum.travis-ci.com/rikenbit/meshr_devel.svg?token=6E5jqenfjNHBfKtQkabT)](https://magnum.travis-ci.com/rikenbit/)
 
 Tools for conducting enrichment analysis of MeSH
 Release version is available from [Bioconductor](http://www.bioconductor.org/packages/release/bioc/html/meshr.html)
