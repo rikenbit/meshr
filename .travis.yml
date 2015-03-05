@@ -1,0 +1,16 @@
+before_script:
+    - sudo apt-get install r-base
+    - sudo apt-get instsall r-cran-*
+
+script:
+    - R -e "1"
+
+notifications:
+  emails:
+    - k.t.the-answer@hotmail.co.jp
+  on_failure: always
+
+os:
+    - linux
+    - osx
+    - windows
