@@ -9,8 +9,6 @@ r_binary_packages:
  - RUnit
  - testthat
 
-# Install the bleeding edge version of a package from github (eg to pick
-# up a not-yet-released bugfix)
 r_github_packages:
  - rikenbit/meshr_release/meshr
 
