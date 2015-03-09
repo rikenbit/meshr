@@ -372,7 +372,7 @@ We first created two objects of gene sets, i.e., selected and universal genes,
 by comparing significantly regulated genes between iPS and hESC under the significance level of 0.05, then mapped the Gene Symbols to Entrez Gene IDs through the \Rpackage{org.Hs.eg.db} package. Pre-processed Gene IDs are easily accessible by $\bf{data}$ function.
 
 \begin{center}
-<<echo=TRUE,print=FALSE>>=
+<<echo=TRUE,print=FALSE,eval = FALSE>>=
 library("meshr")
 data(geneid.cummeRbund)
 data(sig.geneid.cummeRbund)
@@ -383,7 +383,7 @@ Finally 303 universal genes and 104 selected genes are detected and subsequently
 used for the MeSH enrichment analysis.
 
 \begin{center}
-<<echo=TRUE,print=FALSE>>=
+<<echo=TRUE,print=FALSE,eval = FALSE>>=
 dim(geneid.cummeRbund)[1]
 dim(sig.geneid.cummeRbund)[1]
 @
@@ -392,7 +392,7 @@ dim(sig.geneid.cummeRbund)[1]
 We proceed to uncover a characteristic of MeSH terms that the set of identified genes share each other via the \Rpackage{meshr} package. We first load the required packages.
 
 \begin{center}
-<<echo=TRUE,print=FALSE>>=
+<<echo=TRUE,print=FALSE,eval = FALSE>>=
 library("fdrtool")
 library("org.MeSH.Hsa.db")
 @

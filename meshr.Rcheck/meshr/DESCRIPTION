@@ -13,5 +13,5 @@ Suggests:
 License: Artistic-2.0
 biocViews: AnnotationData, FunctionalAnnotation, Bioinformatics,
         Statistics, Annotation, MultipleComparisons
-Packaged: 2015-03-05 21:52:03 UTC; tsuyusakikouki
-Built: R 3.1.1; ; 2015-03-05 21:54:29 UTC; unix
+Packaged: 2015-03-09 05:24:49 UTC; tsuyusakikouki
+Built: R 3.1.1; ; 2015-03-09 05:25:30 UTC; unix

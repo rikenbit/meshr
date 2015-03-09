@@ -299,7 +299,7 @@ Loading required package: org.MeSH.Syn.db
 > ###
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  267.461 5.562 276.657 0.003 0.004 
+Time elapsed:  256.488 4.772 264.326 0.002 0.002 
 > grDevices::dev.off()
 null device 
           1 
