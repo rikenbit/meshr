@@ -148,14 +148,14 @@ In our packages, all data are extracted by only 4 functions defined by \Rpackage
 
 At first, install and load the \Rpackage{MeSH.db}.
 \begin{center}
-<<echo=TRUE,print=FALSE>>=
+<<echo=TRUE,print=FALSE,eval = FALSE>>=
 library(MeSH.db)
 @
 \end{center}
 
 ls function shows all objects in this package. MeSH.db object is generated. This is also package's name and all MeSH-related packages provide the object named as package name (e.g., $MeSH.db$, $org.MeSH.Mmu.db$).
 \begin{center}
-<<echo=TRUE,print=FALSE>>=
+<<echo=TRUE,print=FALSE,eval = FALSE>>=
 ls("package:MeSH.db")
 MeSH.db
 @
@@ -165,7 +165,7 @@ Here, we use $\bf{columns}$, $\bf{keytypes}$, $\bf{keys}$ and $\bf{select}$ agai
 
 $\bf{columns}$ returns the rows which we can retrieve in MeSH.db.
 \begin{center}
-<<echo=TRUE,print=FALSE>>=
+<<echo=TRUE,print=FALSE,eval = FALSE>>=
 columns(MeSH.db)
 @
 \end{center}
@@ -173,7 +173,7 @@ columns(MeSH.db)
 $\bf{keytypes}$ returns the rows which can be used as the optional parameter in $\bf{keys}$ and $\bf{select}$ functions against MeSH.db.
 
 \begin{center}
-<<echo=TRUE,print=FALSE>>=
+<<echo=TRUE,print=FALSE,eval = FALSE>>=
 keytypes(MeSH.db)
 @
 \end{center}
@@ -181,7 +181,7 @@ keytypes(MeSH.db)
 \newpage
 $\bf{keys}$ function returns the value of keytype.
 \begin{center}
-<<echo=TRUE,print=FALSE>>=
+<<echo=TRUE,print=FALSE,eval = FALSE>>=
 k <- keys(MeSH.db, keytype="MESHID")
 length(k)
 head(k)
@@ -190,7 +190,7 @@ head(k)
 
 $\bf{select}$ function returns rows in particular columns, which are having user-specified keys. This function provides the data as a dataframe. Now, we will retrieve the rows in which MESHID is equivalent to MESHTERM.
 \begin{center}
-<<echo=TRUE,print=FALSE>>=
+<<echo=TRUE,print=FALSE,eval = FALSE>>=
 select(MeSH.db, keys=k[1:10], columns=c("MESHID","MESHTERM"),
        keytype="MESHID")
 @
@@ -203,7 +203,7 @@ Next, we will retrieve some information about $Leukemia$ by our packages.
 
 $\bf{select}$ function retrieves rows in which MESHTERM is "$Leukemia$" in the MeSH.db table.
 \begin{center}
-<<echo=TRUE,print=FALSE>>=
+<<echo=TRUE,print=FALSE,eval = FALSE>>=
 LEU <- select(MeSH.db, keys="Leukemia",
               columns=c("MESHID", "MESHTERM", "CATEGORY", "SYNONYM"), keytype="MESHTERM")
 LEU
@@ -215,7 +215,7 @@ $\bf{select}$ function shows that MESHID of $Leukemia$ is D007938 and $Leukemia$
 As mentioned above, MeSH has hierarchical structures. \Rpackage{MeSH.AOR.db} and \Rpackage{MeSH.PCR.db} packages provide such hierarchical information of MeSH. For example, \Rpackage{MeSH.AOR.db} enable us to examine the top terms of $Leukemia$.
 
 \begin{center}
-<<echo=TRUE,print=FALSE>>=
+<<echo=TRUE,print=FALSE,eval = FALSE>>=
 library("MeSH.AOR.db")
 ANC <- select(MeSH.AOR.db, keys="D007938",
         columns=c("ANCESTOR","OFFSPRING"), keytype="OFFSPRING")
@@ -226,7 +226,7 @@ D009370 has found above $Leukemia$.\\
 
 These MeSH IDs can be translated to MeSH Term.
 \begin{center}
-<<echo=TRUE,print=FALSE>>=
+<<echo=TRUE,print=FALSE,eval = FALSE>>=
 select(MeSH.db, keys=ANC[1,1], columns=c("MESHTERM"), keytype="MESHID")
 @
 \end{center}
@@ -234,7 +234,7 @@ In this way, we can specify that $Leukemia$ is categorized as one of $Neoplasms 
 
 Once keytype-parameter set to opposite direction (OFFSPRING to ANCESTOR), other MeSH IDs in lower hierarchies also can be retrieved.
 \begin{center}
-<<echo=TRUE,print=FALSE>>=
+<<echo=TRUE,print=FALSE,eval = FALSE>>=
 OFF <- select(MeSH.AOR.db, keys="D007938",
        columns=c("ANCESTOR","OFFSPRING"), keytype="ANCESTOR")
 OFF
@@ -245,7 +245,7 @@ There are a lot of MeSH terms, which means $Leukemia$ has many lower hierarchies
 
 \Rpackage{MeSH.PCR.db} provides the directly lower (or upper) terms.
 \begin{center}
-<<echo=TRUE,print=FALSE>>=
+<<echo=TRUE,print=FALSE,eval = FALSE>>=
 library("MeSH.PCR.db")
 CHI <- select(MeSH.PCR.db, keys=LEU[1,1],
        columns=c("PARENT","CHILD"), keytype="PARENT")
@@ -263,7 +263,7 @@ Some optional functions for much complex data acquisition are also provided. In 
 
 $dbInfo$ returns the information of the package. $dbfile$ returns the directory where sqlite file is stored. $dbschema$ returns the schema of database. $dbconn$ returns the connection constructed by \Rpackage{RSQLite}.
 \begin{center}
-<<echo=TRUE,print=FALSE>>=
+<<echo=TRUE,print=FALSE,eval = FALSE>>=
 dbInfo(MeSH.db)
 dbfile(MeSH.db)
 dbschema(MeSH.db)
@@ -273,7 +273,7 @@ dbconn(MeSH.db)
 
 $dbschema$ shows the data is stored as a table named "DATA" in the sqlite database and the table has six columns; MESHID, MESHTERM, CATEGORY, SYNONYM, QUALIFIERID, and QUALIFIER. Therefore, we can retrieve data by much complex SQL query like below;
 \begin{center}
-<<echo=TRUE,print=FALSE>>=
+<<echo=TRUE,print=FALSE,eval = FALSE>>=
 library("RSQLite")
 SQL1 <- paste(
   "SELECT MESHTERM, QUALIFIERID, QUALIFIER FROM DATA",
@@ -304,7 +304,7 @@ dbGetQuery(dbconn(MeSH.PCR.db), SQL3)
 As well as \Rpackage{MeSH.db},  \Rpackage{MeSH.AOR.db}, and \Rpackage{MeSH.PCR.db}, $org.MeSH.XXX.db$-type packages also use 4 functions ($\bf{keytypes}$, $\bf{columns}$, $\bf{keys}$ and $\bf{select}$) to extract data.
 
 \begin{center}
-<<echo=TRUE,print=FALSE>>=
+<<echo=TRUE,print=FALSE,eval = FALSE>>=
 library("org.MeSH.Hsa.db")
 columns(org.MeSH.Hsa.db)
 keytypes(org.MeSH.Hsa.db)
@@ -316,7 +316,7 @@ select(MeSH.db, keys=key_HSA[1:10], columns=c("MESHID","MESHTERM"),
 Moreover, these packages have other additional functions like $\bf{species}$, $\bf{nomenclature}$, $\bf{listDatabases}$.
 In each $org.MeSH.XXX.db$, $\bf{species}$ function returns the common name and $\bf{nomenclature}$ returns the scientific name.
 \begin{center}
-<<echo=TRUE,print=FALSE>>=
+<<echo=TRUE,print=FALSE,eval = FALSE>>=
 library("org.MeSH.Aca.db")
 library("org.MeSH.Atu.K84.db")
 library("org.MeSH.Bsu.168.db")
@@ -339,7 +339,7 @@ nomenclature(org.MeSH.Syn.db)
 $\bf{listDatabases}$ function returns the source of data (figure 3). In regard to RBBH, name of organisms is returned. These values are important when users specify the database for MeSH Term enrichment analysis (see the section 2.4).
 
 \begin{center}
-<<echo=TRUE,print=FALSE>>=
+<<echo=TRUE,print=FALSE,eval = FALSE>>=
 listDatabases(org.MeSH.Hsa.db)
 listDatabases(org.MeSH.Aca.db)
 listDatabases(org.MeSH.Atu.K84.db)

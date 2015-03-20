@@ -12,6 +12,7 @@ import(org.MeSH.Syn.db)
 import(cummeRbund)
 import(org.Hs.eg.db)
 import(Category)
+import(S4Vectors)
 
 importFrom(BiocGenerics, annotation, "annotation<-")
 

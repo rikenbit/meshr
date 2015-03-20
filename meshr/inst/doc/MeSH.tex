@@ -160,23 +160,8 @@ ls function shows all objects in this package. MeSH.db object is generated. This
 \begin{Schunk}
 \begin{Sinput}
 > ls("package:MeSH.db")
-\end{Sinput}
-\begin{Soutput}
-[1] "MeSH.db"
-\end{Soutput}
-\begin{Sinput}
 > MeSH.db
 \end{Sinput}
-\begin{Soutput}
-[1] "##### class ####"
-[1] "MeSHDb"
-attr(,"package")
-[1] "MeSHDbi"
-[1] "##### connection #####"
-<SQLiteConnection>
-[1] "##### package name #####"
-[1] "MeSH.db"
-\end{Soutput}
 \end{Schunk}
 \end{center}
 
@@ -188,10 +173,6 @@ $\bf{columns}$ returns the rows which we can retrieve in MeSH.db.
 \begin{Sinput}
 > columns(MeSH.db)
 \end{Sinput}
-\begin{Soutput}
-[1] "MESHID"      "MESHTERM"    "CATEGORY"    "SYNONYM"     "QUALIFIERID"
-[6] "QUALIFIER"  
-\end{Soutput}
 \end{Schunk}
 \end{center}
 
@@ -202,10 +183,6 @@ $\bf{keytypes}$ returns the rows which can be used as the optional parameter in 
 \begin{Sinput}
 > keytypes(MeSH.db)
 \end{Sinput}
-\begin{Soutput}
-[1] "MESHID"      "MESHTERM"    "CATEGORY"    "SYNONYM"     "QUALIFIERID"
-[6] "QUALIFIER"  
-\end{Soutput}
 \end{Schunk}
 \end{center}
 
@@ -216,16 +193,8 @@ $\bf{keys}$ function returns the value of keytype.
 \begin{Sinput}
 > k <- keys(MeSH.db, keytype = "MESHID")
 > length(k)
-\end{Sinput}
-\begin{Soutput}
-[1] 27149
-\end{Soutput}
-\begin{Sinput}
 > head(k)
 \end{Sinput}
-\begin{Soutput}
-[1] "D000001" "D000002" "D000003" "D000004" "D000005" "D000006"
-\end{Soutput}
 \end{Schunk}
 \end{center}
 
@@ -236,19 +205,6 @@ $\bf{select}$ function returns rows in particular columns, which are having user
 > select(MeSH.db, keys = k[1:10], columns = c("MESHID", "MESHTERM"), 
 +     keytype = "MESHID")
 \end{Sinput}
-\begin{Soutput}
-     MESHID               MESHTERM
-1   D000001             Calcimycin
-141 D000002                Temefos
-219 D000003              Abattoirs
-246 D000004 Abbreviations as Topic
-255 D000005                Abdomen
-271 D000006         Abdomen, Acute
-382 D000007     Abdominal Injuries
-493 D000008    Abdominal Neoplasms
-619 D000009      Abdominal Muscles
-700 D000010         Abducens Nerve
-\end{Soutput}
 \end{Schunk}
 \end{center}
 
@@ -265,20 +221,6 @@ $\bf{select}$ function retrieves rows in which MESHTERM is "$Leukemia$" in the M
 +     "MESHTERM", "CATEGORY", "SYNONYM"), keytype = "MESHTERM")
 > LEU
 \end{Sinput}
-\begin{Soutput}
-     MESHID MESHTERM CATEGORY
-1   D007938 Leukemia        C
-38  D007938 Leukemia        C
-75  D007938 Leukemia        C
-112 D007938 Leukemia        C
-149 D007938 Leukemia        C
-                                                 SYNONYM
-1                                        Leucocythaemias
-38  Leucocythaemia|T191|NON|EQV|NLM (2012)|110224|abcdef
-75                                        Leucocythemias
-112  Leucocythemia|T191|NON|EQV|NLM (2012)|110224|abcdef
-149                                            Leukemias
-\end{Soutput}
 \end{Schunk}
 \end{center}
 
@@ -294,10 +236,6 @@ As mentioned above, MeSH has hierarchical structures. \Rpackage{MeSH.AOR.db} and
 +     "OFFSPRING"), keytype = "OFFSPRING")
 > ANC
 \end{Sinput}
-\begin{Soutput}
-  ANCESTOR OFFSPRING
-1  D009370   D007938
-\end{Soutput}
 \end{Schunk}
 \end{center}
 D009370 has found above $Leukemia$.\\
@@ -308,10 +246,6 @@ These MeSH IDs can be translated to MeSH Term.
 \begin{Sinput}
 > select(MeSH.db, keys = ANC[1, 1], columns = c("MESHTERM"), keytype = "MESHID")
 \end{Sinput}
-\begin{Soutput}
-                      MESHTERM
-1 Neoplasms by Histologic Type
-\end{Soutput}
 \end{Schunk}
 \end{center}
 In this way, we can specify that $Leukemia$ is categorized as one of $Neoplasms by Histologic Type$.
@@ -323,34 +257,8 @@ Once keytype-parameter set to opposite direction (OFFSPRING to ANCESTOR), other 
 > OFF <- select(MeSH.AOR.db, keys = "D007938", columns = c("ANCESTOR", 
 +     "OFFSPRING"), keytype = "ANCESTOR")
 > OFF
-\end{Sinput}
-\begin{Soutput}
-  ANCESTOR OFFSPRING
-1  D007938   D007942
-2  D007938   D007943
-3  D007938   D007945
-4  D007938   D007946
-5  D007938   D007951
-6  D007938   D007952
-7  D007938   D007953
-8  D007938   D016582
-9  D007938   D016583
-\end{Soutput}
-\begin{Sinput}
 > select(MeSH.db, keys = OFF[, 2], columns = c("MESHTERM"), keytype = "MESHID")
 \end{Sinput}
-\begin{Soutput}
-                        MESHTERM
-1         Leukemia, Experimental
-505         Leukemia, Hairy Cell
-764           Leukemia, Lymphoid
-1023         Leukemia, Mast-Cell
-1208           Leukemia, Myeloid
-2022       Leukemia, Plasma Cell
-2281 Leukemia, Radiation-Induced
-2466            Leukemia, Feline
-2571    Enzootic Bovine Leukosis
-\end{Soutput}
 \end{Schunk}
 \end{center}
 There are a lot of MeSH terms, which means $Leukemia$ has many lower hierarchies.\\
@@ -363,29 +271,9 @@ There are a lot of MeSH terms, which means $Leukemia$ has many lower hierarchies
 > CHI <- select(MeSH.PCR.db, keys = LEU[1, 1], columns = c("PARENT", 
 +     "CHILD"), keytype = "PARENT")
 > head(CHI)
-\end{Sinput}
-\begin{Soutput}
-   PARENT   CHILD
-1 D007938 D001353
-2 D007938 D001752
-3 D007938 D004915
-4 D007938 D007939
-5 D007938 D007940
-6 D007938 D007941
-\end{Soutput}
-\begin{Sinput}
 > head(select(MeSH.db, keys = CHI[, 2], columns = c("MESHTERM"), 
 +     keytype = "MESHID"))
 \end{Sinput}
-\begin{Soutput}
-                            MESHTERM
-1                     Avian Leukosis
-106                     Blast Crisis
-365  Leukemia, Erythroblastic, Acute
-1068                  Leukemia L1210
-1176                  Leukemia L5178
-1284                   Leukemia P388
-\end{Soutput}
 \end{Schunk}
 \end{center}
 
@@ -401,37 +289,10 @@ $dbInfo$ returns the information of the package. $dbfile$ returns the directory 
 \begin{Schunk}
 \begin{Sinput}
 > dbInfo(MeSH.db)
-\end{Sinput}
-\begin{Soutput}
-             NAME                                     VALUE
-1      SOURCEDATE                               19-Nov-2013
-2      SOURCENAME                  Medical Subject Headings
-3       SOURCEURL http://www.nlm.nih.gov/mesh/filelist.html
-4        DBSCHEMA                                   MeSH.db
-5 DBSCHEMAVERSION                                       1.0
-6     MESHVERSION                                      2014
-7         package                                   MeSH.db
-8         Db type                                   MeSH.Db
-\end{Soutput}
-\begin{Sinput}
 > dbfile(MeSH.db)
-\end{Sinput}
-\begin{Soutput}
-[1] "/Library/Frameworks/R.framework/Versions/3.1/Resources/library/MeSH.db/extdata/MeSH.db.sqlite"
-\end{Soutput}
-\begin{Sinput}
 > dbschema(MeSH.db)
-\end{Sinput}
-\begin{Soutput}
-[1] "CREATE TABLE DATA (\n  MESHID CHAR(7) NOT NULL,\n  MESHTERM VARCHAR(100) NOT NULL,\n  CATEGORY CHAR(1) NOT NULL,\n  SYNONYM VARCHAR(100),\n  QUALIFIERID CHAR(7),\n  QUALIFIER VARCHAR(100)\n)"
-[2] "CREATE TABLE METADATA (\n  NAME VARCHAR(80),\n  VALUE VARCHAR(255)\n)"                                                                                                                         
-\end{Soutput}
-\begin{Sinput}
 > dbconn(MeSH.db)
 \end{Sinput}
-\begin{Soutput}
-<SQLiteConnection>
-\end{Soutput}
 \end{Schunk}
 \end{center}
 
@@ -443,48 +304,13 @@ $dbschema$ shows the data is stored as a table named "DATA" in the sqlite databa
 > SQL1 <- paste("SELECT MESHTERM, QUALIFIERID, QUALIFIER FROM DATA", 
 +     "WHERE MESHID = 'D000001'", "AND QUALIFIERID = 'Q000494'")
 > dbGetQuery(dbconn(MeSH.db), SQL1)
-\end{Sinput}
-\begin{Soutput}
-    MESHTERM QUALIFIERID    QUALIFIER
-1 Calcimycin     Q000494 pharmacology
-2 Calcimycin     Q000494 pharmacology
-3 Calcimycin     Q000494 pharmacology
-4 Calcimycin     Q000494 pharmacology
-5 Calcimycin     Q000494 pharmacology
-\end{Soutput}
-\begin{Sinput}
 > SQL2 <- paste("SELECT ANCESTOR, OFFSPRING FROM DATA", "WHERE OFFSPRING = 'D000002'", 
 +     "OR OFFSPRING = 'D000003'", "OR OFFSPRING = 'D000004'", "OR ANCESTOR = 'D009275'")
 > dbGetQuery(dbconn(MeSH.AOR.db), SQL2)
-\end{Sinput}
-\begin{Soutput}
-  ANCESTOR OFFSPRING
-1  D063086   D000002
-2  D008462   D000003
-3  D009275   D000004
-4  D009275   D000851
-5  D009275   D004850
-\end{Soutput}
-\begin{Sinput}
 > SQL3 <- paste("SELECT PARENT, CHILD FROM DATA", "WHERE PARENT = 'D000005'", 
 +     "AND NOT CHILD = 'D004312'")
 > dbGetQuery(dbconn(MeSH.PCR.db), SQL3)
 \end{Sinput}
-\begin{Soutput}
-    PARENT   CHILD
-1  D000005 D006119
-2  D000005 D007264
-3  D000005 D008643
-4  D000005 D008646
-5  D000005 D009852
-6  D000005 D010529
-7  D000005 D010537
-8  D000005 D012187
-9  D000005 D014472
-10 D000005 D034841
-11 D000005 D034861
-12 D000005 D054048
-\end{Soutput}
 \end{Schunk}
 \end{center}
 
@@ -498,34 +324,11 @@ As well as \Rpackage{MeSH.db},  \Rpackage{MeSH.AOR.db}, and \Rpackage{MeSH.PCR.d
 \begin{Sinput}
 > library("org.MeSH.Hsa.db")
 > columns(org.MeSH.Hsa.db)
-\end{Sinput}
-\begin{Soutput}
-[1] "GENEID"       "MESHID"       "MESHCATEGORY" "SOURCEID"     "SOURCEDB"    
-\end{Soutput}
-\begin{Sinput}
 > keytypes(org.MeSH.Hsa.db)
-\end{Sinput}
-\begin{Soutput}
-[1] "GENEID"       "MESHID"       "MESHCATEGORY" "SOURCEID"     "SOURCEDB"    
-\end{Soutput}
-\begin{Sinput}
 > key_HSA <- keys(org.MeSH.Hsa.db, keytype = "MESHID")
 > select(MeSH.db, keys = key_HSA[1:10], columns = c("MESHID", "MESHTERM"), 
 +     keytype = "MESHID")
 \end{Sinput}
-\begin{Soutput}
-      MESHID                      MESHTERM
-1    D000001                    Calcimycin
-141  D000002                       Temefos
-219  D000005                       Abdomen
-235  D000006                Abdomen, Acute
-346  D000007            Abdominal Injuries
-457  D000008           Abdominal Neoplasms
-583  D000009             Abdominal Muscles
-664  D000010                Abducens Nerve
-1139 D000011 Abelson murine leukemia virus
-1178 D000012          Abetalipoproteinemia
-\end{Soutput}
 \end{Schunk}
 \end{center}
 Moreover, these packages have other additional functions like $\bf{species}$, $\bf{nomenclature}$, $\bf{listDatabases}$.
@@ -538,64 +341,16 @@ In each $org.MeSH.XXX.db$, $\bf{species}$ function returns the common name and $
 > library("org.MeSH.Bsu.168.db")
 > library("org.MeSH.Syn.db")
 > species(org.MeSH.Hsa.db)
-\end{Sinput}
-\begin{Soutput}
-[1] "Human"
-\end{Soutput}
-\begin{Sinput}
 > species(org.MeSH.Aca.db)
-\end{Sinput}
-\begin{Soutput}
-[1] "Lizard"
-\end{Soutput}
-\begin{Sinput}
 > species(org.MeSH.Atu.K84.db)
-\end{Sinput}
-\begin{Soutput}
-[1] NA
-\end{Soutput}
-\begin{Sinput}
 > species(org.MeSH.Bsu.168.db)
-\end{Sinput}
-\begin{Soutput}
-[1] NA
-\end{Soutput}
-\begin{Sinput}
 > species(org.MeSH.Syn.db)
-\end{Sinput}
-\begin{Soutput}
-[1] "Cyanobacteria"
-\end{Soutput}
-\begin{Sinput}
 > nomenclature(org.MeSH.Hsa.db)
-\end{Sinput}
-\begin{Soutput}
-[1] "Homo sapiens"
-\end{Soutput}
-\begin{Sinput}
 > nomenclature(org.MeSH.Aca.db)
-\end{Sinput}
-\begin{Soutput}
-[1] "Anolis carolinensis"
-\end{Soutput}
-\begin{Sinput}
 > nomenclature(org.MeSH.Atu.K84.db)
-\end{Sinput}
-\begin{Soutput}
-[1] "Agrobacterium Tumefacienes K84"
-\end{Soutput}
-\begin{Sinput}
 > nomenclature(org.MeSH.Bsu.168.db)
-\end{Sinput}
-\begin{Soutput}
-[1] "Bacillus subtilis subsp. spizizenii str. 168"
-\end{Soutput}
-\begin{Sinput}
 > nomenclature(org.MeSH.Syn.db)
 \end{Sinput}
-\begin{Soutput}
-[1] "Synechocystis"
-\end{Soutput}
 \end{Schunk}
 \end{center}
 
@@ -605,68 +360,11 @@ $\bf{listDatabases}$ function returns the source of data (figure 3). In regard t
 \begin{Schunk}
 \begin{Sinput}
 > listDatabases(org.MeSH.Hsa.db)
-\end{Sinput}
-\begin{Soutput}
-     SOURCEDB
-1      gendoo
-2 gene2pubmed
-\end{Soutput}
-\begin{Sinput}
 > listDatabases(org.MeSH.Aca.db)
-\end{Sinput}
-\begin{Soutput}
-                                       SOURCEDB
-1                          Arabidopsis thaliana
-2  Bacillus subtilis subsp. spizizenii str. 168
-3                                    Bos taurus
-4                                   Danio rerio
-5                       Drosophila melanogaster
-6      Escherichia coli str K-12 substr. MG1655
-7                                 Gallus gallus
-8                                  Homo sapiens
-9                                  Mus musculus
-10                            Rattus norvegicus
-11               Saccharomyces cerevisiae S288c
-12              Schizosaccharomyces pombe 972h-
-13                                   Sus scrofa
-14                               Xenopus laevis
-15                                  gene2pubmed
-\end{Soutput}
-\begin{Sinput}
 > listDatabases(org.MeSH.Atu.K84.db)
-\end{Sinput}
-\begin{Soutput}
-                                       SOURCEDB
-1                          Arabidopsis thaliana
-2  Bacillus subtilis subsp. spizizenii str. 168
-3                                    Bos taurus
-4                        Caenorhabditis elegans
-5                                   Danio rerio
-6                       Drosophila melanogaster
-7      Escherichia coli str K-12 substr. MG1655
-8                                 Gallus gallus
-9                                  Homo sapiens
-10                                 Mus musculus
-11                            Rattus norvegicus
-12               Saccharomyces cerevisiae S288c
-13              Schizosaccharomyces pombe 972h-
-14                                   Sus scrofa
-15                               Xenopus laevis
-\end{Soutput}
-\begin{Sinput}
 > listDatabases(org.MeSH.Bsu.168.db)
-\end{Sinput}
-\begin{Soutput}
-     SOURCEDB
-1 gene2pubmed
-\end{Soutput}
-\begin{Sinput}
 > listDatabases(org.MeSH.Syn.db)
 \end{Sinput}
-\begin{Soutput}
-  SOURCEDB
-1   gendoo
-\end{Soutput}
 \end{Schunk}
 \end{center}
 
@@ -737,7 +435,7 @@ mGMSHP+ 					maintainer = "Koki Tsuyuzaki <k.t.the-answer@hotmail.co.jp>",
 mGMSHP+ 					author = "Koki Tsuyuzaki",
 mGMSHP+ 					destDir = destination,
 mGMSHP+ 					license="Artistic-2.0")
-Creating package in /var/folders/k0/tk8gl4bj2_v2mbjx80ydsznw0000gn/T//RtmplIugO0/file5d35ba65b59/org.MeSH.Pae.db 
+Creating package in /var/folders/k0/tk8gl4bj2_v2mbjx80ydsznw0000gn/T//RtmpIFSPPT/file802e6e150d8/org.MeSH.Pae.db 
 [1] TRUE
 \end{Soutput}
 \end{Schunk}
@@ -869,17 +567,13 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] org.MeSH.Syn.db_1.2.0     org.MeSH.Bsu.168.db_1.2.0
- [3] org.MeSH.Atu.K84.db_1.2.0 org.MeSH.Aca.db_1.2.0    
- [5] org.MeSH.Hsa.db_1.2.0     RSQLite_1.0.0            
- [7] DBI_0.3.1                 MeSH.PCR.db_1.0.0        
- [9] MeSH.AOR.db_1.0.0         MeSH.db_1.2.0            
-[11] MeSHDbi_1.0.2            
+[1] MeSHDbi_1.0.2
 
 loaded via a namespace (and not attached):
-[1] AnnotationDbi_1.26.1 Biobase_2.24.0       BiocGenerics_0.10.0 
-[4] GenomeInfoDb_1.0.2   IRanges_1.22.10      parallel_3.1.1      
-[7] stats4_3.1.1         tools_3.1.1         
+ [1] AnnotationDbi_1.26.1 Biobase_2.24.0       BiocGenerics_0.10.0 
+ [4] DBI_0.3.1            GenomeInfoDb_1.0.2   IRanges_1.22.10     
+ [7] parallel_3.1.1       RSQLite_1.0.0        stats4_3.1.1        
+[10] tools_3.1.1         
 \end{Soutput}
 \end{Schunk}
 
