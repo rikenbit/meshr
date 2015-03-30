@@ -148,14 +148,14 @@ In our packages, all data are extracted by only 4 functions defined by \Rpackage
 
 At first, install and load the \Rpackage{MeSH.db}.
 \begin{center}
-<<echo=TRUE,print=FALSE,eval = FALSE>>=
+<<echo=TRUE,print=FALSE>>=
 library(MeSH.db)
 @
 \end{center}
 
 ls function shows all objects in this package. MeSH.db object is generated. This is also package's name and all MeSH-related packages provide the object named as package name (e.g., $MeSH.db$, $org.MeSH.Mmu.db$).
 \begin{center}
-<<echo=TRUE,print=FALSE,eval = FALSE>>=
+<<echo=TRUE,print=FALSE>>=
 ls("package:MeSH.db")
 MeSH.db
 @
@@ -165,7 +165,7 @@ Here, we use $\bf{columns}$, $\bf{keytypes}$, $\bf{keys}$ and $\bf{select}$ agai
 
 $\bf{columns}$ returns the rows which we can retrieve in MeSH.db.
 \begin{center}
-<<echo=TRUE,print=FALSE,eval = FALSE>>=
+<<echo=TRUE,print=FALSE>>=
 columns(MeSH.db)
 @
 \end{center}
@@ -173,7 +173,7 @@ columns(MeSH.db)
 $\bf{keytypes}$ returns the rows which can be used as the optional parameter in $\bf{keys}$ and $\bf{select}$ functions against MeSH.db.
 
 \begin{center}
-<<echo=TRUE,print=FALSE,eval = FALSE>>=
+<<echo=TRUE,print=FALSE>>=
 keytypes(MeSH.db)
 @
 \end{center}
@@ -181,7 +181,7 @@ keytypes(MeSH.db)
 \newpage
 $\bf{keys}$ function returns the value of keytype.
 \begin{center}
-<<echo=TRUE,print=FALSE,eval = FALSE>>=
+<<echo=TRUE,print=FALSE>>=
 k <- keys(MeSH.db, keytype="MESHID")
 length(k)
 head(k)
@@ -190,7 +190,7 @@ head(k)
 
 $\bf{select}$ function returns rows in particular columns, which are having user-specified keys. This function provides the data as a dataframe. Now, we will retrieve the rows in which MESHID is equivalent to MESHTERM.
 \begin{center}
-<<echo=TRUE,print=FALSE,eval = FALSE>>=
+<<echo=TRUE,print=FALSE>>=
 select(MeSH.db, keys=k[1:10], columns=c("MESHID","MESHTERM"),
        keytype="MESHID")
 @
@@ -203,7 +203,7 @@ Next, we will retrieve some information about $Leukemia$ by our packages.
 
 $\bf{select}$ function retrieves rows in which MESHTERM is "$Leukemia$" in the MeSH.db table.
 \begin{center}
-<<echo=TRUE,print=FALSE,eval = FALSE>>=
+<<echo=TRUE,print=FALSE>>=
 LEU <- select(MeSH.db, keys="Leukemia",
               columns=c("MESHID", "MESHTERM", "CATEGORY", "SYNONYM"), keytype="MESHTERM")
 LEU
@@ -215,7 +215,7 @@ $\bf{select}$ function shows that MESHID of $Leukemia$ is D007938 and $Leukemia$
 As mentioned above, MeSH has hierarchical structures. \Rpackage{MeSH.AOR.db} and \Rpackage{MeSH.PCR.db} packages provide such hierarchical information of MeSH. For example, \Rpackage{MeSH.AOR.db} enable us to examine the top terms of $Leukemia$.
 
 \begin{center}
-<<echo=TRUE,print=FALSE,eval = FALSE>>=
+<<echo=TRUE,print=FALSE>>=
 library("MeSH.AOR.db")
 ANC <- select(MeSH.AOR.db, keys="D007938",
         columns=c("ANCESTOR","OFFSPRING"), keytype="OFFSPRING")
@@ -226,7 +226,7 @@ D009370 has found above $Leukemia$.\\
 
 These MeSH IDs can be translated to MeSH Term.
 \begin{center}
-<<echo=TRUE,print=FALSE,eval = FALSE>>=
+<<echo=TRUE,print=FALSE>>=
 select(MeSH.db, keys=ANC[1,1], columns=c("MESHTERM"), keytype="MESHID")
 @
 \end{center}
@@ -234,7 +234,7 @@ In this way, we can specify that $Leukemia$ is categorized as one of $Neoplasms 
 
 Once keytype-parameter set to opposite direction (OFFSPRING to ANCESTOR), other MeSH IDs in lower hierarchies also can be retrieved.
 \begin{center}
-<<echo=TRUE,print=FALSE,eval = FALSE>>=
+<<echo=TRUE,print=FALSE>>=
 OFF <- select(MeSH.AOR.db, keys="D007938",
        columns=c("ANCESTOR","OFFSPRING"), keytype="ANCESTOR")
 OFF
@@ -245,7 +245,7 @@ There are a lot of MeSH terms, which means $Leukemia$ has many lower hierarchies
 
 \Rpackage{MeSH.PCR.db} provides the directly lower (or upper) terms.
 \begin{center}
-<<echo=TRUE,print=FALSE,eval = FALSE>>=
+<<echo=TRUE,print=FALSE>>=
 library("MeSH.PCR.db")
 CHI <- select(MeSH.PCR.db, keys=LEU[1,1],
        columns=c("PARENT","CHILD"), keytype="PARENT")
@@ -263,7 +263,7 @@ Some optional functions for much complex data acquisition are also provided. In 
 
 $dbInfo$ returns the information of the package. $dbfile$ returns the directory where sqlite file is stored. $dbschema$ returns the schema of database. $dbconn$ returns the connection constructed by \Rpackage{RSQLite}.
 \begin{center}
-<<echo=TRUE,print=FALSE,eval = FALSE>>=
+<<echo=TRUE,print=FALSE>>=
 dbInfo(MeSH.db)
 dbfile(MeSH.db)
 dbschema(MeSH.db)
@@ -273,7 +273,7 @@ dbconn(MeSH.db)
 
 $dbschema$ shows the data is stored as a table named "DATA" in the sqlite database and the table has six columns; MESHID, MESHTERM, CATEGORY, SYNONYM, QUALIFIERID, and QUALIFIER. Therefore, we can retrieve data by much complex SQL query like below;
 \begin{center}
-<<echo=TRUE,print=FALSE,eval = FALSE>>=
+<<echo=TRUE,print=FALSE>>=
 library("RSQLite")
 SQL1 <- paste(
   "SELECT MESHTERM, QUALIFIERID, QUALIFIER FROM DATA",
@@ -304,7 +304,7 @@ dbGetQuery(dbconn(MeSH.PCR.db), SQL3)
 As well as \Rpackage{MeSH.db},  \Rpackage{MeSH.AOR.db}, and \Rpackage{MeSH.PCR.db}, $org.MeSH.XXX.db$-type packages also use 4 functions ($\bf{keytypes}$, $\bf{columns}$, $\bf{keys}$ and $\bf{select}$) to extract data.
 
 \begin{center}
-<<echo=TRUE,print=FALSE,eval = FALSE>>=
+<<echo=TRUE,print=FALSE>>=
 library("org.MeSH.Hsa.db")
 columns(org.MeSH.Hsa.db)
 keytypes(org.MeSH.Hsa.db)
@@ -316,7 +316,7 @@ select(MeSH.db, keys=key_HSA[1:10], columns=c("MESHID","MESHTERM"),
 Moreover, these packages have other additional functions like $\bf{species}$, $\bf{nomenclature}$, $\bf{listDatabases}$.
 In each $org.MeSH.XXX.db$, $\bf{species}$ function returns the common name and $\bf{nomenclature}$ returns the scientific name.
 \begin{center}
-<<echo=TRUE,print=FALSE,eval = FALSE>>=
+<<echo=TRUE,print=FALSE>>=
 library("org.MeSH.Aca.db")
 library("org.MeSH.Atu.K84.db")
 library("org.MeSH.Bsu.168.db")
@@ -339,7 +339,7 @@ nomenclature(org.MeSH.Syn.db)
 $\bf{listDatabases}$ function returns the source of data (figure 3). In regard to RBBH, name of organisms is returned. These values are important when users specify the database for MeSH Term enrichment analysis (see the section 2.4).
 
 \begin{center}
-<<echo=TRUE,print=FALSE,eval = FALSE>>=
+<<echo=TRUE,print=FALSE>>=
 listDatabases(org.MeSH.Hsa.db)
 listDatabases(org.MeSH.Aca.db)
 listDatabases(org.MeSH.Atu.K84.db)
@@ -372,7 +372,7 @@ We first created two objects of gene sets, i.e., selected and universal genes,
 by comparing significantly regulated genes between iPS and hESC under the significance level of 0.05, then mapped the Gene Symbols to Entrez Gene IDs through the \Rpackage{org.Hs.eg.db} package. Pre-processed Gene IDs are easily accessible by $\bf{data}$ function.
 
 \begin{center}
-<<echo=TRUE,print=FALSE,eval = FALSE>>=
+<<echo=TRUE,print=FALSE>>=
 library("meshr")
 data(geneid.cummeRbund)
 data(sig.geneid.cummeRbund)
@@ -383,7 +383,7 @@ Finally 303 universal genes and 104 selected genes are detected and subsequently
 used for the MeSH enrichment analysis.
 
 \begin{center}
-<<echo=TRUE,print=FALSE,eval = FALSE>>=
+<<echo=TRUE,print=FALSE>>=
 dim(geneid.cummeRbund)[1]
 dim(sig.geneid.cummeRbund)[1]
 @
@@ -392,7 +392,7 @@ dim(sig.geneid.cummeRbund)[1]
 We proceed to uncover a characteristic of MeSH terms that the set of identified genes share each other via the \Rpackage{meshr} package. We first load the required packages.
 
 \begin{center}
-<<echo=TRUE,print=FALSE,eval = FALSE>>=
+<<echo=TRUE,print=FALSE>>=
 library("fdrtool")
 library("org.MeSH.Hsa.db")
 @
@@ -405,7 +405,7 @@ For more details on description of all the arguments, readers are referred to th
 help page.
 
 \begin{center}
-<<echo=TRUE,print=FALSE,eval = FALSE>>=
+<<echo=TRUE,print=FALSE>>=
 meshParams <- new("MeSHHyperGParams", geneIds=sig.geneid.cummeRbund[,2], universeGeneIds=geneid.cummeRbund[,2],
                   annotation="org.MeSH.Hsa.db", category="C", database="gendoo", pvalueCutoff=0.05, pAdjust="none")
 @
@@ -414,7 +414,7 @@ meshParams <- new("MeSHHyperGParams", geneIds=sig.geneid.cummeRbund[,2], univers
 The \textbf{meshHyperGTest} function carries out a hypergeometric test and returns an instance of class \textbf{MeSHHyperGResult}.
 
 \begin{center}
-<<echo=TRUE,print=FALSE,eval = FALSE>>=
+<<echo=TRUE,print=FALSE>>=
 meshR <- meshHyperGTest(meshParams)
 @
 \end{center}
@@ -423,7 +423,7 @@ Simply typing the \textbf{MeSHHyperGResult} class gives a brief description of t
 the choice of a MeSH category, the annotation data used, and a total number of identified overrepresented MeSH terms.
 
 \begin{center}
-<<echo=TRUE,print=FALSE,eval = FALSE>>=
+<<echo=TRUE,print=FALSE>>=
 meshR
 @
 \end{center}
@@ -432,7 +432,7 @@ Full details of the result is obtained by calling the \textbf{summary} function 
 This presents significantly enriched MeSH ID, MeSH term, and their associated $p$-values.
 
 \begin{center}
-<<echo=TRUE,print=FALSE,eval = FALSE>>=
+<<echo=TRUE,print=FALSE>>=
 head(summary(meshR))
 @
 \end{center}
@@ -441,7 +441,7 @@ Switching to test another MeSH category and another database can be easily done.
 For example, to choose the category as G (Phenomena and Processes) and the database as gene2pubmed, we can do the following.
 
 \begin{center}
-<<echo=TRUE,print=FALSE,eval = FALSE>>=
+<<echo=TRUE,print=FALSE>>=
 category(meshParams) <- "G"
 database(meshParams) <- "gene2pubmed"
 meshR <- meshHyperGTest(meshParams)
