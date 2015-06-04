@@ -12,7 +12,9 @@ R CMD INSTALL meshr
 
 References
 ======
-[Tsuyuzaki K, Morota G, Ishii M, Nakazato T, Miyazaki S, Nikaido I, MeSH ORA framework: R/Bioconductor packages to support MeSH over-representation analysis, BMC Bioinformatics. 2015;16(45)](http://www.biomedcentral.com/1471-2105/16/45/abstract)
+[Tsuyuzaki K., Morota G., Ishii M., Nakazato T., Miyazaki S., Nikaido I., MeSH ORA framework: R/Bioconductor packages to support MeSH over-representation analysis, BMC Bioinformatics, 2015;16(45)](http://www.biomedcentral.com/1471-2105/16/45/abstract)
+
+[Morota G., Peñagaricano F., Petersen, J. L., Ciobanu, D. C.,  Tsuyuzaki, K., Nikaido, I., An application of MeSH enrichment analysis in livestock, Animal Genetics, 2015;DOI: 10.1111/age.12307](http://onlinelibrary.wiley.com/doi/10.1111/age.12307/abstract)
 
 ## License
 Copyright (c) 2015 Koki Tsuyuzaki and RIKEN Bioinformatics Research Unit
