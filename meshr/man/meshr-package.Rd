@@ -16,7 +16,7 @@ Package: \tab meshr\cr
 Version: \tab 1.2.6\cr
 Date: \tab 3-20-2015\cr
 biocViews: \tab AnnotationData, FunctionalAnnotation, Bioinformatics, Statistics, Annotation, MultipleComparisons\cr
-Depends: \tab R (>= 3.0.1), cummeRbund, org.Hs.eg.db, fdrtool, Category, BiocGenerics, methods, MeSH.db, MeSH.AOR.db, MeSH.PCR.db, MeSHDbi, org.MeSH.Hsa.db, org.MeSH.Aca.db, org.MeSH.Atu.K84.db, org.MeSH.Bsu.168.db, org.MeSH.Syn.db\cr
+Depends: \tab R (>= 3.0.1), cummeRbund, org.Hs.eg.db, fdrtool, Category, BiocGenerics, methods, MeSH.db, MeSH.AOR.db, MeSH.PCR.db, MeSHDbi, MeSH.Hsa.eg.db, MeSH.Aca.eg.db, MeSH.Atu.K84.eg.db, MeSH.Bsu.168.eg.db, MeSH.Syn.eg.db\cr
 Imports: \tab \cr
 Suggests: \tab \cr
 License: \tab Artistic-2.0\cr

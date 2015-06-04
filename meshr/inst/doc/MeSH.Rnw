@@ -48,7 +48,7 @@ $^4$Bioinformatics Research Unit, RIKEN Advanced Center for Computing and Commun
 %\clearpage
 \newpage
 \section{Introduction}
-This document provides the way to use MeSH-related packages; \Rpackage{MeSH.db}, \Rpackage{MeSH.AOR.db}, \Rpackage{MeSH.PCR.db}, $org.MeSH.XXX.db$-type packages, \Rpackage{MeSHDbi}, and \Rpackage{meshr} packages. MeSH (Medical Subject Headings) is the NLM (U. S. National Library of Medicine) controlled vocabulary used to manually index articles for MEDLINE/PubMed \cite{Nelson2004} and is a collection of a comprehensive life science vocabulary.
+This document provides the way to use MeSH-related packages; \Rpackage{MeSH.db}, \Rpackage{MeSH.AOR.db}, \Rpackage{MeSH.PCR.db}, $MeSH.XXX.eg.db$-type packages, \Rpackage{MeSHDbi}, and \Rpackage{meshr} packages. MeSH (Medical Subject Headings) is the NLM (U. S. National Library of Medicine) controlled vocabulary used to manually index articles for MEDLINE/PubMed \cite{Nelson2004} and is a collection of a comprehensive life science vocabulary.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[ht]
 \centering
@@ -83,7 +83,7 @@ MeSH contains more than 25,000 clinical and biological terms. The amount of MeSH
   \end{table}
 \end{center}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-This vignette introduces R/Bioconductor packages for handling MeSH in R. Original MeSH data is accessible by NLM FTP site (\url{http://www.nlm.nih.gov/mesh/filelist.html}). The data are downloadable as plain-text format (ASCII MeSH; d2014.bin / q2014.bin). These files were pre-processed by our data-processing pipeline (figure 2) and corresponding information is summarized as a table in SQLite3 file and packed into \Rpackage{MeSH.db}, \Rpackage{MeSH.AOR.db}, and \Rpackage{MeSH.PCR.db}.
+This vignette introduces R/Bioconductor packages for handling MeSH in R. Original MeSH data is accessible by NLM FTP site (\url{http://www.nlm.nih.gov/mesh/filelist.html}). The data are downloadable as plain-text format (ASCII MeSH; d2015.bin / q2015.bin). These files were pre-processed by our data-processing pipeline (figure 2) and corresponding information is summarized as a table in SQLite3 file and packed into \Rpackage{MeSH.db}, \Rpackage{MeSH.AOR.db}, and \Rpackage{MeSH.PCR.db}.
 
 \clearpage
 \subsection{About MeSH}
@@ -98,7 +98,7 @@ This vignette introduces R/Bioconductor packages for handling MeSH in R. Origina
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
 \subsection{The correspondence between MeSH ID and NCBI Entrez Gene ID}
-org.MeSH.XXX.db (XXX is an abbreviation of species name such as Hsa: Homo sapiens) packages provide the correspondence between Entrez Gene IDs and NLM MeSH IDs. Such correspondence in wide variety of organisms are summarized as each org.MeSH.XXX.db by three way of methods, Gendoo\cite{Nakazato2009}, gene2pubmed, and RBBH (reciprocal BLAST best Hit).
+MeSH.XXX.eg.db (XXX is an abbreviation of species name such as Hsa: Homo sapiens) packages provide the correspondence between Entrez Gene IDs and NLM MeSH IDs. Such correspondence in wide variety of organisms are summarized as each MeSH.XXX.eg.db by three way of methods, Gendoo\cite{Nakazato2009}, gene2pubmed, and RBBH (reciprocal BLAST best Hit).
 
 Gendoo is the web-application based on text-mining of PubMed. Co-occurrence relations in PubMed document are exhaustively retrieved and much relevant correspondence are filtered by some information science techniques.
 
@@ -122,16 +122,16 @@ For some minor species including non-model organisms, which have no sufficient d
 \begin{figure}[ht]
 \centering
 \includegraphics[width=\linewidth,angle=270]{fig3.png}
-\caption{120 organisms for org.MeSH.XXX.db and those source databases}
+\caption{120 organisms for MeSH.XXX.eg.db and those source databases}
 \label{fig3}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
 \subsection{Database interface package for MeSH-related packages}
-We also implemented a database interface (DBI) package named \Rpackage{MeSHDbi}. This package is important because of two reasons. First reason is a unification of DBI functions for MeSH-related packages. \Rpackage{MeSH.db}, \Rpackage{MeSH.AOR.db}, \Rpackage{MeSH.PCR.db}, and $org.MeSH.XXX.db$ packages inherit the MeSHDb-class defined by \Rpackage{MeSHDbi} and behavior of these packages is uniformly designed. Second reason is supporting construction of user's original org.MeSH.XXX.db package. Due to the rapid development of DNA sequence technology, wide variety of genome sequences are more and more determined and the correspondence of Gene IDs and MeSH IDs may be designed by many databases \cite{Nakazato2007, Nakazato2009, Saurin2010, Sartor2012}. Therefore, we prepared the function to create org.MeSH.XXX.db package for a situation in which users can retrieved the relationship between Gene IDs and MeSH IDs by some means.
+We also implemented a database interface (DBI) package named \Rpackage{MeSHDbi}. This package is important because of two reasons. First reason is a unification of DBI functions for MeSH-related packages. \Rpackage{MeSH.db}, \Rpackage{MeSH.AOR.db}, \Rpackage{MeSH.PCR.db}, and $MeSH.XXX.eg.db$ packages inherit the MeSHDb-class defined by \Rpackage{MeSHDbi} and behavior of these packages is uniformly designed. Second reason is supporting construction of user's original MeSH.XXX.eg.db package. Due to the rapid development of DNA sequence technology, wide variety of genome sequences are more and more determined and the correspondence of Gene IDs and MeSH IDs may be designed by many databases \cite{Nakazato2007, Nakazato2009, Saurin2010, Sartor2012}. Therefore, we prepared the function to create MeSH.XXX.eg.db package for a situation in which users can retrieved the relationship between Gene IDs and MeSH IDs by some means.
 
 \subsection{MeSH term enrichment analysis}
-To analyze MeSH-related packages with omics data, we implement \Rpackage{meshr} package, which is for conducting enrichment analysis using MeSH data. This package internally imports \Rpackage{MeSH.db}, \Rpackage{MeSH.AOR.db}, \Rpackage{MeSH.PCR.db} and $org.MeSH.XXX.db$, then conducts enrichment analysis to detect highlly enriched MeSH terms in gene sets of interesting species.
+To analyze MeSH-related packages with omics data, we implement \Rpackage{meshr} package, which is for conducting enrichment analysis using MeSH data. This package internally imports \Rpackage{MeSH.db}, \Rpackage{MeSH.AOR.db}, \Rpackage{MeSH.PCR.db} and $MeSH.XXX.eg.db$, then conducts enrichment analysis to detect highlly enriched MeSH terms in gene sets of interesting species.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[ht]
 \centering
@@ -153,7 +153,7 @@ library(MeSH.db)
 @
 \end{center}
 
-ls function shows all objects in this package. MeSH.db object is generated. This is also package's name and all MeSH-related packages provide the object named as package name (e.g., $MeSH.db$, $org.MeSH.Mmu.db$).
+ls function shows all objects in this package. MeSH.db object is generated. This is also package's name and all MeSH-related packages provide the object named as package name (e.g., $MeSH.db$, $MeSH.Mmu.eg.db$).
 \begin{center}
 <<echo=TRUE,print=FALSE,eval = FALSE>>=
 ls("package:MeSH.db")
@@ -299,40 +299,37 @@ dbGetQuery(dbconn(MeSH.PCR.db), SQL3)
 \end{center}
 
 \clearpage
-\subsection{org.MeSH.XXX.db-type packages}
+\subsection{MeSH.XXX.eg.db-type packages}
 \subsubsection{Annotation of 120 organisms}
-As well as \Rpackage{MeSH.db},  \Rpackage{MeSH.AOR.db}, and \Rpackage{MeSH.PCR.db}, $org.MeSH.XXX.db$-type packages also use 4 functions ($\bf{keytypes}$, $\bf{columns}$, $\bf{keys}$ and $\bf{select}$) to extract data.
+As well as \Rpackage{MeSH.db},  \Rpackage{MeSH.AOR.db}, and \Rpackage{MeSH.PCR.db}, $MeSH.XXX.eg.db$-type packages also use 4 functions ($\bf{keytypes}$, $\bf{columns}$, $\bf{keys}$ and $\bf{select}$) to extract data.
 
 \begin{center}
 <<echo=TRUE,print=FALSE,eval = FALSE>>=
-library("org.MeSH.Hsa.db")
-columns(org.MeSH.Hsa.db)
-keytypes(org.MeSH.Hsa.db)
-key_HSA <- keys(org.MeSH.Hsa.db, keytype="MESHID")
+library("MeSH.Hsa.eg.db")
+columns(MeSH.Hsa.eg.db)
+keytypes(MeSH.Hsa.eg.db)
+key_HSA <- keys(MeSH.Hsa.eg.db, keytype="MESHID")
 select(MeSH.db, keys=key_HSA[1:10], columns=c("MESHID","MESHTERM"),
        keytype="MESHID")
 @
 \end{center}
 Moreover, these packages have other additional functions like $\bf{species}$, $\bf{nomenclature}$, $\bf{listDatabases}$.
-In each $org.MeSH.XXX.db$, $\bf{species}$ function returns the common name and $\bf{nomenclature}$ returns the scientific name.
+In each $MeSH.XXX.eg.db$, $\bf{species}$ function returns the common name and $\bf{nomenclature}$ returns the scientific name.
 \begin{center}
 <<echo=TRUE,print=FALSE,eval = FALSE>>=
-library("org.MeSH.Aca.db")
-library("org.MeSH.Atu.K84.db")
-library("org.MeSH.Bsu.168.db")
-library("org.MeSH.Syn.db")
+library("MeSH.Aca.eg.db")
+library("MeSH.Bsu.168.eg.db")
+library("MeSH.Syn.eg.db")
 
-species(org.MeSH.Hsa.db)
-species(org.MeSH.Aca.db)
-species(org.MeSH.Atu.K84.db)
-species(org.MeSH.Bsu.168.db)
-species(org.MeSH.Syn.db)
+species(MeSH.Hsa.eg.db)
+species(MeSH.Aca.eg.db)
+species(MeSH.Bsu.168.eg.db)
+species(MeSH.Syn.eg.db)
 
-nomenclature(org.MeSH.Hsa.db)
-nomenclature(org.MeSH.Aca.db)
-nomenclature(org.MeSH.Atu.K84.db)
-nomenclature(org.MeSH.Bsu.168.db)
-nomenclature(org.MeSH.Syn.db)
+nomenclature(MeSH.Hsa.eg.db)
+nomenclature(MeSH.Aca.eg.db)
+nomenclature(MeSH.Bsu.168.eg.db)
+nomenclature(MeSH.Syn.eg.db)
 @
 \end{center}
 
@@ -340,18 +337,17 @@ $\bf{listDatabases}$ function returns the source of data (figure 3). In regard t
 
 \begin{center}
 <<echo=TRUE,print=FALSE,eval = FALSE>>=
-listDatabases(org.MeSH.Hsa.db)
-listDatabases(org.MeSH.Aca.db)
-listDatabases(org.MeSH.Atu.K84.db)
-listDatabases(org.MeSH.Bsu.168.db)
-listDatabases(org.MeSH.Syn.db)
+listDatabases(MeSH.Hsa.eg.db)
+listDatabases(MeSH.Aca.eg.db)
+listDatabases(MeSH.Bsu.168.eg.db)
+listDatabases(MeSH.Syn.eg.db)
 @
 \end{center}
 
 \clearpage
 \subsection{MeSHDbi}
-\subsubsection{User's custom org.MeSH.XXX.db package}
-Although most of users may not be conscious of this package, \Rpackage{MeSHDbi} is important for our MeSH packages. This package regulates class definition of MeSH object (MeSHDb-class). Besides, this package constructs user's original $org.MeSH.XXX.db$ package. $\bf{makeGeneMeSHPackage}$ easily constructs such package.
+\subsubsection{User's custom MeSH.XXX.eg.db package}
+Although most of users may not be conscious of this package, \Rpackage{MeSHDbi} is important for our MeSH packages. This package regulates class definition of MeSH object (MeSHDb-class). Besides, this package constructs user's original $MeSH.XXX.eg.db$ package. $\bf{makeGeneMeSHPackage}$ easily constructs such package.
 
 \begin{center}
 <<echo=TRUE,print=FALSE>>=
@@ -365,7 +361,7 @@ example("makeGeneMeSHPackage")
 \subsubsection{MeSH enrichment analysis}
 The \Rpackage{meshr} package is designed to conduct an enrichment analysis for MeSH.  The idea behind this package is analogous to GO enrichment analysis, where sets of genes is analyzed to extract common annotated biological properties. The usage of \Rpackage{meshr} closely follows that of the Bioconductor \Rpackage{GOstats} package. Thus, users who are familiar with \Rpackage{GOstats} may easily handle \Rpackage{meshr}.
 
-The \Rpackage{meshr} package accepts selected and universal genes as input, and returns significantly overrepresented MeSH terms. It is used in conjunction with \Rpackage{MeSH.db} package and one of the annotation packages, (e.g., \Rpackage{org.MeSH.Hsa.db}). This section serves as a quick guide to the \Rpackage{meshr}, while illustrating entire process to perform a MeSH enrichment analysis.
+The \Rpackage{meshr} package accepts selected and universal genes as input, and returns significantly overrepresented MeSH terms. It is used in conjunction with \Rpackage{MeSH.db} package and one of the annotation packages, (e.g., \Rpackage{MeSH.Hsa.eg.db}). This section serves as a quick guide to the \Rpackage{meshr}, while illustrating entire process to perform a MeSH enrichment analysis.
 
 Here, we use the example data set taken from the Bioconductor package \Rpackage{cummeRbund}. The example data are located in library/cummeRbund/extdata/. This RNA-Seq data were taken from three samples, "iPS", "hESC", and  "Fibroblasts".
 We first created two objects of gene sets, i.e., selected and universal genes,
@@ -394,12 +390,12 @@ We proceed to uncover a characteristic of MeSH terms that the set of identified 
 \begin{center}
 <<echo=TRUE,print=FALSE,eval = FALSE>>=
 library("fdrtool")
-library("org.MeSH.Hsa.db")
+library("MeSH.Hsa.eg.db")
 @
 \end{center}
 
 We create a parameter instance by specifying the objects of selected and universal genes, the name of the annotation package, the category of MeSH, the database of correspondence between Gene IDs and MeSH IDs (see also \textbf{listDatabases} in the section 2.2.1), $p$-value cutoff, and the choice of a multiple-testing correction method.
-In this first example, we use \Rpackage{org.MeSH.Hsa.db} because the above RNA-seq data is extracted from human cells.
+In this first example, we use \Rpackage{MeSH.Hsa.eg.db} because the above RNA-seq data is extracted from human cells.
 We choose C (Diseases) category, gendoo database, $p$-value cutoff 0.05, and no multiple-testing adjustment.
 For more details on description of all the arguments, readers are referred to the \textbf{MeSHHyperGParams-class}
 help page.
@@ -407,7 +403,7 @@ help page.
 \begin{center}
 <<echo=TRUE,print=FALSE,eval = FALSE>>=
 meshParams <- new("MeSHHyperGParams", geneIds=sig.geneid.cummeRbund[,2], universeGeneIds=geneid.cummeRbund[,2],
-                  annotation="org.MeSH.Hsa.db", category="C", database="gendoo", pvalueCutoff=0.05, pAdjust="none")
+                  annotation="MeSH.Hsa.eg.db", category="C", database="gendoo", pvalueCutoff=0.05, pAdjust="none")
 @
 \end{center}
 

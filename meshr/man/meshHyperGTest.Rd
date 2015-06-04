@@ -37,7 +37,7 @@ Maintainer: Koki Tsuyuzaki <k.t.the-answer@hotmail.co.jp>
 data(geneid.cummeRbund)
 data(sig.geneid.cummeRbund)
 
-meshParams <- new("MeSHHyperGParams", geneIds=sig.geneid.cummeRbund[,2], universeGeneIds=geneid.cummeRbund[,2], annotation="org.MeSH.Hsa.db", category="D", database="gendoo", pvalueCutoff=0.05, pAdjust="none")
+meshParams <- new("MeSHHyperGParams", geneIds=sig.geneid.cummeRbund[,2], universeGeneIds=geneid.cummeRbund[,2], annotation="MeSH.Hsa.eg.db", category="D", database="gendoo", pvalueCutoff=0.05, pAdjust="none")
 
 meshR <- meshHyperGTest(meshParams)
 }

@@ -1,3 +1,8 @@
+VERSION 1.4.0
+------------------------
+   o MeSH.Atu.K84.eg.db was removed from Depends
+   o New CITATION was added
+
 VERSION 1.2.3
 ------------------------
    o Exception handling when none of significant MeSH term is detected
