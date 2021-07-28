@@ -1,12 +1,13 @@
-# meshr_release
+# meshr
 
-Tools for conducting enrichment analysis of MeSH. Release version is available from [Bioconductor](http://www.bioconductor.org/packages/release/bioc/html/meshr.html)
+Tools for conducting enrichment analysis of MeSH.
+Release version is available from [Bioconductor](http://www.bioconductor.org/packages/release/bioc/html/meshr.html)
 
 Installation
 ======
 ~~~~
-git clone https://github.com/rikenbit/meshr_release/
-cd meshr_release
+git clone https://github.com/rikenbit/meshr/
+cd meshr
 R CMD INSTALL meshr
 ~~~~
 
@@ -24,4 +25,3 @@ Released under the [Artistic License 2.0](http://www.perlfoundation.org/artistic
 - Koki Tsuyuzaki
 - Manabu Ishii
 - Itoshi Nikaido
-

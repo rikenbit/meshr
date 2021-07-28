@@ -1,0 +1,41 @@
+import(methods)
+import(fdrtool)
+import(MeSHDbi)
+import(cummeRbund)
+import(org.Hs.eg.db)
+import(Category)
+import(S4Vectors)
+
+importFrom(RSQLite, dbGetQuery)
+importFrom(stats, p.adjust)
+importFrom(utils, data, download.file, read.delim, setTxtProgressBar, txtProgressBar)
+importFrom(BiocGenerics, annotation, "annotation<-")
+
+exportClasses(MeSHHyperGParams, MeSHHyperGResult)
+
+exportMethods(## Results
+              "meshHyperGTest",
+              "meshIds",
+              "meshCategory",
+              "meshAnnotation",
+              "meshDatabase",
+              "show",
+              "summary",
+              "save.pdf",
+
+              ## Params
+              "initialize",
+              "geneIds",
+              "universeGeneIds",
+              "universeGeneIds<-",
+              "annotation",
+              "annotation<-",
+              category,
+              "category<-",
+              database,
+              "database<-",
+              "pvalueCutoff",
+              "pvalueCutoff<-",
+              "pAdjust",
+              "pAdjust<-",
+              "makeValidParams")
