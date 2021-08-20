@@ -1,7 +1,9 @@
-VERSION 1.30.0
+VERSION 2.0.0
 ------------------------
+   o Specification changed as "AnnotationHub-style"
    o Dependencies of MeSH.db, MeSH.AOR.db, MeSH.PCR.db, MeSH.Hsa.eg.db, MeSH.Aca.eg.db, MeSH.Bsu.168.eg.db, MeSH.Syn.eg.db were removed
-   o Documentation improved
+   o Vignette changed for the specification change
+   o All datasets removed
 
 VERSION 1.6.1
 ------------------------

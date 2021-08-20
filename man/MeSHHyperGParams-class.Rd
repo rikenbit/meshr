@@ -53,6 +53,8 @@ Objects can be created by calls of the form \code{new("MeSHHyperGParams", ...)}.
       universe for the hypergeometric calculation.}
     \item{\code{annotation}:}{A string giving the name of the
       gene-MeSH annotation package like MeSH.XXX.eg.db.}
+    \item{\code{meshdb}:}{A string giving the name of the
+      MeSH database like MeSH.db.}
     \item{\code{category}:}{A string giving the name of the
       MeSH category like A, B, C, D, ...and so on.}
     \item{\code{database}:}{A string giving the name of the

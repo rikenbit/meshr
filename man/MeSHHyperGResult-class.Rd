@@ -26,9 +26,6 @@
 \alias{summary}
 \alias{summary,MeSHHyperGResult-method}
 
-\alias{save.pdf}
-\alias{save.pdf,MeSHHyperGResult-method}
-
 \title{Class "MeSHHyperGResult"}
 
 \description{
@@ -88,9 +85,6 @@ Objects can be created by calls of the form \code{new("MeSHHyperGResult", ...)}.
 
   \item{show}{\code{signature(object = "MeSHHyperGResult")}:
       Return a short description of the result.}
-
-  \item{save.pdf}{\code{signature(object = "MeSHHyperGResult")}:
-      Return PDF files corresponding PMCID. This function is available only when using gene2pubmed as database}
   }
 }
 

@@ -1,8 +1,6 @@
 import(methods)
 import(fdrtool)
 import(MeSHDbi)
-import(cummeRbund)
-import(org.Hs.eg.db)
 import(Category)
 import(S4Vectors)
 
@@ -21,7 +19,6 @@ exportMethods(## Results
               "meshDatabase",
               "show",
               "summary",
-              "save.pdf",
 
               ## Params
               "initialize",

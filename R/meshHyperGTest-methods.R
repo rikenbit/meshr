@@ -81,6 +81,7 @@ setMethod("meshHyperGTest", signature(p="MeSHHyperGParams"),
       warning("None of MeSH Term is significant !")
     }
 
+  MeSH.db <- eval(parse(text=p@meshdb))
   out2 <- dbGetQuery(dbconn(MeSH.db), "SELECT * FROM DATA;")
   tmp2 <- sapply(names(selected.mesh), function(i){
     target <- which(out2$MESHID == i)
@@ -90,7 +91,6 @@ setMethod("meshHyperGTest", signature(p="MeSHHyperGParams"),
     MESHID=unlist(tmp2["MESHID", ]),
     MESHTERM=unlist(tmp2["MESHTERM", ]))
 
-  # FromMeSHdb <- select(MeSH.db, keys=names(selected.mesh), columns=c('MESHID', 'MESHTERM'), keytype='MESHID')
   outputB <- merge(FromMeSHdb, selectedDatabase, by = "MESHID")
   output <- merge(outputA, outputB, by = "MESHID")
   output <- output[order(output$Pvalue), ]

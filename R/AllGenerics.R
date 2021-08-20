@@ -36,5 +36,3 @@ setGeneric("meshDatabase", function(r) standardGeneric("meshDatabase"))
 setGeneric("meshHyperGTest",
            function(p) standardGeneric("meshHyperGTest"),
            valueClass="MeSHHyperGResult")
-
-setGeneric("save.pdf",function(r){standardGeneric("save.pdf")})
