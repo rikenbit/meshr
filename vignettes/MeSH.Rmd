@@ -43,7 +43,7 @@ The following are the advantages of this AnnotationHub-style.
 
 - The installation time of the entire Bioconductor packages will be reduced.
 - Old data will be archived.
-- Data reproducibility is ensured (e.g. the version of the data can be specified, such as "v001").
+- Data reproducibility is ensured (e.g. the version of the data can be specified, such as "v002").
 
 In the following sections, we will show you how to use the new AnnotationHub-style MeSH ORA framework. If you want to check the previous style of the MeSH ORA framework for some reason, please check the vignette of meshr in BioC 3.13^[https://bioconductor.org/packages/3.13/bioc/vignettes/meshr/inst/doc/MeSH.pdf].
 
@@ -70,17 +70,17 @@ head(mcols(ah))
 `query()` returns the details of a specific entry of AnnotationHub. Note that this just returns the metadata and not actual data.
 
 ```{r Access4, eval=FALSE}
-mcols(query(ah, c("MeSHDb", "MeSH.db", "v001")))
+mcols(query(ah, c("MeSHDb", "MeSH.db", "v002")))
 ```
 
 By specifying some keywords and adding [[1]] with the `query()`, `query()` downloads the data to our local machine. The internal data (SQLite files) of the previous MeSH annotation packages will be stored as a cache on our local machines by the `r Biocpkg("BiocFileCache")` mechanism.
 
 ```{r Access5, eval=FALSE}
-dbfile1 <- query(ah, c("MeSHDb", "MeSH.db", "v001"))[[1]]
-dbfile2 <- query(ah, c("MeSHDb", "MeSH.AOR.db", "v001"))[[1]]
-dbfile3 <- query(ah, c("MeSHDb", "MeSH.PCR.db", "v001"))[[1]]
-dbfile4 <- query(ah, c("MeSHDb", "Danio rerio", "v001"))[[1]]
-dbfile5 <- query(ah, c("MeSHDb", "Pseudomonas aeruginosa PAO1", "v001"))[[1]]
+dbfile1 <- query(ah, c("MeSHDb", "MeSH.db", "v002"))[[1]]
+dbfile2 <- query(ah, c("MeSHDb", "MeSH.AOR.db", "v002"))[[1]]
+dbfile3 <- query(ah, c("MeSHDb", "MeSH.PCR.db", "v002"))[[1]]
+dbfile4 <- query(ah, c("MeSHDb", "Danio rerio", "v002"))[[1]]
+dbfile5 <- query(ah, c("MeSHDb", "Pseudomonas aeruginosa PAO1", "v002"))[[1]]
 ```
 
 These SQLite files can be immediately converted into `MeSHDb` objects by running `MeSHDbi::MeSHDb` and can be used for the MeSH enrichment analysis described in the next section.

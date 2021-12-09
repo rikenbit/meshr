@@ -17,6 +17,8 @@ References
 
 [Morota G., Peñagaricano F., Petersen, J. L., Ciobanu, D. C.,  Tsuyuzaki, K., Nikaido, I., An application of MeSH enrichment analysis in livestock, Animal Genetics, 2015;DOI: 10.1111/age.12307](http://onlinelibrary.wiley.com/doi/10.1111/age.12307/abstract)
 
+[Amorim S. T., Tsuyuzaki K. Nikaido, I. Morota G., Improved MeSH analysis software tools for farm animals, Animal Genetics, 2021; DOI: 10.1111/age.13159](https://onlinelibrary.wiley.com/doi/10.1111/age.13159)
+
 ## License
 Copyright (c) 2015 Koki Tsuyuzaki and RIKEN Bioinformatics Research Unit
 Released under the [Artistic License 2.0](http://www.perlfoundation.org/artistic_license_2_0).
